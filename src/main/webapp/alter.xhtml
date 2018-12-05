@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="cadastro">
+            <h:outputLabel value="Sigla" for="ipSigla" />
+            <h:selectOneMenu value="#{estadoBean.estado}" >
+                <f:selectItems value="#{estadoBean.siglas}" var="s" itemValue="#{s}" itemLabel="#{s}" />                
+            </h:selectOneMenu>
+            <br/>
+            
+            <h:outputLabel value="Nome" for="ipNome" />
+            <h:inputText value="#{estadoBean.estado.nome}" id="ipNome" />
+            
+            <br />
+            
+            <h:commandButton value="Cadastrar" action="#{estadoBean.cadastrar}" />
+        </h:form>        
+        
+            <div style="border: solid 1px black">
+                    <h:form id="lista">
+                    <h:dataTable id="dtlista" value="#{estadoBean.estados}" var="e">
+                        <h:column>
+                            <h:outputText value="#{e.sigla}" />
+                        </h:column>
+                        <h:column >
+                            <h:outputText value="#{e.nome}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                    <h:outputText value="Ações"/>
+                            </f:facet>
+                            <h:commandLink value="remover" action="#{estadoBean.excluir}"
+                                    onclick="if(!confirm('Deseja realmente remover este produto?')) {return false;}">
+                                    <f:setPropertyActionListener value="#{e}" target="#{estadoBean.estado}"/>
+                            </h:commandLink> 
+                            <br/>
+                            <p:commandLink value="editar" oncomplete="PF('alterarEstadoDialog').show()" update=":lista:dialogAlterar">
+                                    <f:setPropertyActionListener value="#{e}" target="#{estadoBean.estado}"/>
+                            </p:commandLink>
+                             
+                        </h:column>
+                    </h:dataTable>
+                    <p:dialog id="dialogAlterar" header="Alterar Estado" widgetVar="alterarEstadoDialog" modal="true" height="100">
+                        <h:panelGrid columns="2" >
+                            <h:outputLabel value="Sigla" for="ipSigla" />
+                            <h:selectOneMenu value="#{estadoBean.estado.sigla}" >
+                                <f:selectItems value="#{estadoBean.siglas}" var="s" itemValue="#{s}" itemLabel="#{s}" />                
+                            </h:selectOneMenu>
+                            
+                            <h:outputLabel value="Nome" for="ipNome" />
+                            <h:inputText value="#{estadoBean.estado.nome}" id="ipNome" />
+
+                            <h:commandButton value="Alterar" action="#{estadoBean.alterar}" />
+                        </h:panelGrid>
+                    </p:dialog>
+                </h:form>
+            </div>
+
+    </h:body>
+</html>

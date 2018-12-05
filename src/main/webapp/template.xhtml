@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title>Facelets Template</title>
+    </h:head>
+   
+        <h:body>
+           <p:growl id='mensagem'/>  
+            
+            <div id="geral">  
+                <div id="top">
+                    <ui:insert name="top"><span style="color: greenyellow">On</span>Pet</ui:insert>
+                </div>
+
+                <div id="menu">
+                   <h:form id="formenu">
+                    <p:menubar >
+                        <p:submenu label="Animal" >
+                            <p:menuitem value="Registrar" url="cadastrarAnimal.xhtml"/>                        
+                            <p:menuitem value="Visualizar Todos" url="listaAnimais.xhtml"/>
+                            
+                        </p:submenu>
+
+                        <p:submenu label="Cliente">
+                            <p:menuitem value="Registrar" url="cadastroCliente.xhtml"/>
+                            <p:menuitem value="Visualizar Todos" url="listaCliente.xhtml"/>
+                        </p:submenu>
+
+
+
+                        <p:submenu label="Colaborador">
+                            <p:menuitem value="Registrar" url="cadastrarColaborador.xhtml"/>                                             
+                            
+                            
+                        </p:submenu>
+
+                        <p:menuitem value="Sair" url="login.xhtml"/>
+                    </p:menubar>
+               </h:form>  
+                </div>
+
+
+                <div id="content" class="center_content">
+                    <ui:insert name="content">Content</ui:insert>
+                </div>
+
+                <div id="bottom">
+                    <ui:insert name="bottom">Versão 0.0.0.1</ui:insert>
+                </div>
+            </div>       
+
+        </h:body>
+   
+</html>
